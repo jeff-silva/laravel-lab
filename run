@@ -1,0 +1,12 @@
+#!/bin/sh
+
+file="./bin/$1.sh"
+
+if [ -f $file ]; then
+    echo ""
+    echo "########## Running $file ##########"
+    echo ""
+    sh $file
+else
+    echo "File $file does not exists"
+fi

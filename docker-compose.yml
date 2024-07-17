@@ -1,0 +1,57 @@
+networks:
+  sail:
+    # driver: bridge
+
+volumes:
+  sail-mysql:
+    # driver: local
+  sail-redis:
+    driver: local
+
+services:
+  backend:
+    build: ./backend/.docker/
+    entrypoint: php artisan octane:frankenphp --max-requests=1
+    env_file:
+      - .env
+      - ./backend/.env
+    volumes:
+      - ./backend:/app
+    ports:
+      # - "${SERVICE_BACKEND_HTTP_PORT:-80}:8000"
+      - 8000:8000
+    networks:
+      - sail
+    depends_on:
+      - mysql
+    extra_hosts:
+      - host.docker.internal:host-gateway
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - sail
+
+  mysql:
+    build: ./mysql
+    env_file:
+      - .env
+      - ./mysql/.env
+    ports:
+      - "${SERVICE_MYSQL_PORT:-3306}:3306"
+    networks:
+      - sail
+
+  phpmyadmin:
+    build: ./phpmyadmin
+    env_file:
+      - .env
+      - ./phpmyadmin/.env
+    ports:
+      - "${SERVICE_PHPMYADMIN_PORT:-8081}:80"
+    networks:
+      - sail
+    depends_on:
+      - mysql
