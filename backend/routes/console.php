@@ -9,3 +9,7 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Schedule::command('telescope:prune')->daily();
+
+Artisan::command('blabla', function () {
+    echo uniqid();
+})->purpose('says "blabla"')->cron('* * * * *');

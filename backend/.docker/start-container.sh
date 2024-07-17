@@ -1,9 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+# echo "start-container.sh está sendo executado" > /tmp/script.log
+# exec > /tmp/script.log 2>&1
+# set -x
+
+# ENV SERVER_NAME=domain.com
 
 cd /app
-
 composer install
 php artisan config:clear
-redis-server
 
-exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+exec supervisord -c /etc/supervisor/supervisord.conf
