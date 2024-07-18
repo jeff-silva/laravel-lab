@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Facade;
-
 return [
 
     /*
@@ -125,8 +123,4 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
-    'aliases' => Facade::defaultAliases()->merge([
-		// your aliases...
-        'Redis' => Illuminate\Support\Facades\Redis::class,
-    ])->toArray(),
 ];

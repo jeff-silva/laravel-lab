@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get -y install git zip unzip supervisor bash supervisor
 
 RUN install-php-extensions \
-    pcntl
+    pcntl pdo_mysql
 
 COPY ./start-container.sh /usr/local/bin/start-container.sh
 COPY ./supervisord.conf /etc/supervisor/supervisord.conf

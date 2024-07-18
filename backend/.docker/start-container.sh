@@ -8,6 +8,8 @@
 
 cd /app
 composer install
+php artisan migrate
+php artisan db:seed
 php artisan config:clear
 
 echo "" > /app/storage/logs/supervisor-php-stdout.log
